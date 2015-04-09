@@ -4,7 +4,7 @@ A simple natural string sorter for Go.
 ##Usage
 Implements the `sort.Interface`
 
-called by `sort.Sort(NaturalSort([]string)`
+called by `sort.Sort(NaturalSort([]string))`
 ###Example
 
 ```go
