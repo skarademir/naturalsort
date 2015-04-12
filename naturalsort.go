@@ -30,6 +30,9 @@ func (s NaturalSort) Less(i, j int) bool {
 			inti, ei := strconv.Atoi(spliti[index])
 			intj, ej := strconv.Atoi(splitj[index])
 			if ei == nil && ej == nil { //if number
+				if inti == intj {
+					return len(spliti[index]) < len(splitj[index])
+				}
 				return inti < intj
 			}
 			return spliti[index] < splitj[index]

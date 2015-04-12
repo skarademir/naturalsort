@@ -50,6 +50,11 @@ func TestSortValid(t *testing.T) {
 			[]string{"z1a10", "z1ax2", "z1ax"},
 			[]string{"z1a10", "z1ax", "z1ax2"},
 		},
+		{
+			// regression test for #8
+			[]string{"a0000001", "a0001"},
+			[]string{"a0001", "a0000001"},
+		},
 	}
 
 	for i, c := range cases {
