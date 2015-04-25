@@ -58,7 +58,9 @@ func TestSortValid(t *testing.T) {
 		{
 			// regression test for #10
 			[]string{"1", "#1", "_1", "a"} ,
-			[]string{"#1", "1",  "_1", "a"} ,
+		},
+		{
+			// regression test for #10 - Number sort before any symbols even if theyre lower on the ASCII table
 		},
 		{
 			// regression test for #10

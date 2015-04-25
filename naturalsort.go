@@ -22,8 +22,8 @@ func (s NaturalSort) Less(i, j int) bool {
 
 	for index := 0; index < len(spliti) && index < len(splitj); index++ {
 		if spliti[index] != splitj[index] {
-			// Handle numerical case
-			if isNumber(spliti[index]) && isNumber(splitj[index]) { //if number
+			// Both slices are numbers
+			if isNumber(spliti[index]) && isNumber(splitj[index]) {
 				// Remove Leading Zeroes
 				stringi := strings.TrimLeft(spliti[index], "0")
 				stringj := strings.TrimLeft(splitj[index], "0")
@@ -37,7 +37,11 @@ func (s NaturalSort) Less(i, j int) bool {
 				}
 				return len(stringi) < len(stringj)
 			}
-			// Handle non-numerical case
+			// One of the slices is a number (we give precedence to numbers regardless of ASCII table position)
+			if isNumber(spliti[index]) || isNumber(splitj[index]) {
+				return isNumber(spliti[index])
+			}
+			// Both slices are not numbers
 			return spliti[index] < splitj[index]
 		}
 
