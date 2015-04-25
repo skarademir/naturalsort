@@ -21,20 +21,19 @@ func (s NaturalSort) Less(i, j int) bool {
 	spliti := r.FindAllString(strings.Replace(s[i], " ", "", -1), -1)
 	splitj := r.FindAllString(strings.Replace(s[j], " ", "", -1), -1)
 
-	splitshortest := len(spliti)
-	if len(spliti) > len(splitj) {
-		splitshortest = len(splitj)
-	}
-	for index := 0; index < splitshortest; index++ {
+	for index := 0; index < len(spliti) && index < len(splitj); index++ {
 		if spliti[index] != splitj[index] {
-			inti, ei := strconv.Atoi(spliti[index])
-			intj, ej := strconv.Atoi(splitj[index])
-			if ei == nil && ej == nil { //if number
+			// Try to convert the left and right portions to integer
+			inti, erri := strconv.Atoi(spliti[index])
+			intj, errj := strconv.Atoi(splitj[index])
+			// Handle numerical case
+			if erri == nil && errj == nil { //if number
 				if inti == intj {
 					return len(spliti[index]) < len(splitj[index])
 				}
 				return inti < intj
 			}
+			// Handle non-numerical case
 			return spliti[index] < splitj[index]
 		}
 
