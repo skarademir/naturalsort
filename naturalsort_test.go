@@ -56,16 +56,31 @@ func TestSortValid(t *testing.T) {
 			[]string{"a0001", "a0000001"},
 		},
 		{
-			// regression test for #10
-			[]string{"1", "#1", "_1", "a"} ,
+			// regression test for #10 - Number sort before any symbols even if theyre lower on the ASCII table
+			[]string{"#1", "1", "_1", "a"},
+			[]string{"1", "#1", "_1", "a"},
 		},
 		{
 			// regression test for #10 - Number sort before any symbols even if theyre lower on the ASCII table
+			[]string{"#1", "1", "_1", "a"},
+			[]string{"1", "#1", "_1", "a"},
+		},
+		{
+			[]string{"1", " ", "0"},
+			[]string{" ", "0", "1"},
+		},
+		{
+			[]string{"1", " ", "0"},
+			[]string{" ", "0", "1"},
+		},
+		{
+			[]string{"1", "a", "0"},
+			[]string{"0", "1", "a"},
 		},
 		{
 			// regression test for #10
-			[]string{"111111111111111111112", "111111111111111111113", "1111111111111111111120"} ,
-			[]string{"111111111111111111112", "111111111111111111113", "1111111111111111111120"} ,
+			[]string{"111111111111111111112", "111111111111111111113", "1111111111111111111120"},
+			[]string{"111111111111111111112", "111111111111111111113", "1111111111111111111120"},
 		},
 	}
 

@@ -46,7 +46,7 @@ func (s NaturalSort) Less(i, j int) bool {
 		}
 
 	}
-	return len(s[i]) < len(s[j])
+	return s[i] < s[j]
 }
 func isNumber(input string) bool {
 	return input[0] >= '0' && input[0] <= '9'
