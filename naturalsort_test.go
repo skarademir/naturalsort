@@ -65,13 +65,13 @@ func TestSortValid(t *testing.T) {
 			[]string{"#1", "1", "_1", "a"},
 			[]string{"1", "#1", "_1", "a"},
 		},
-		{
+		{	// test correct handling of space-only strings - This matches the Mac OSX sorting behavior
 			[]string{"1", " ", "0"},
 			[]string{" ", "0", "1"},
 		},
 		{
-			[]string{"1", " ", "0"},
-			[]string{" ", "0", "1"},
+			[]string{"1", " ", " 1", "  "},
+			[]string{" ", "  ", " 1", "1"},
 		},
 		{
 			[]string{"1", "a", "0"},
