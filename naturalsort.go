@@ -23,7 +23,7 @@ func (s NaturalSort) Less(i, j int) bool {
 	for index := 0; index < len(spliti) && index < len(splitj); index++ {
 		if spliti[index] != splitj[index] {
 			// Both slices are numbers
-			if isNumber(spliti[index]) && isNumber(splitj[index]) {
+			if isNumber(spliti[index][0]) && isNumber(splitj[index][0]) {
 				// Remove Leading Zeroes
 				stringi := strings.TrimLeft(spliti[index], "0")
 				stringj := strings.TrimLeft(splitj[index], "0")
@@ -38,16 +38,23 @@ func (s NaturalSort) Less(i, j int) bool {
 				return len(stringi) < len(stringj)
 			}
 			// One of the slices is a number (we give precedence to numbers regardless of ASCII table position)
-			if isNumber(spliti[index]) || isNumber(splitj[index]) {
-				return isNumber(spliti[index])
+			if isNumber(spliti[index][0]) || isNumber(splitj[index][0]) {
+				return isNumber(spliti[index][0])
 			}
 			// Both slices are not numbers
 			return spliti[index] < splitj[index]
 		}
 
 	}
+	// Fall back for cases where space characters have been annihliated by the replacment call
+	// Here we iterate over the unmolsested string and prioritize numbers over
+	for index := 0; index < len(s[i]) && index < len(s[j]); index++ {
+		if isNumber(s[i][index]) || isNumber(s[j][index]) {
+			return isNumber(s[i][index])
+		}
+	}
 	return s[i] < s[j]
 }
-func isNumber(input string) bool {
-	return input[0] >= '0' && input[0] <= '9'
+func isNumber(input uint8) bool {
+	return input >= '0' && input <= '9'
 }
